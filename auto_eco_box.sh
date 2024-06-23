@@ -59,7 +59,7 @@ modify_ecomode() {
   login_status=$(curl -s -L -b "$cookie_file" "$url_login")
   if [[ $login_status != *"index"* ]]
   then
-    logger -t "$0" 'SFR ECO --- Échec de la connexion à la BOX SFR (192.168.1.1)'
+    logger -t "SFR ECO" 'Échec de la connexion à la BOX SFR (192.168.1.1)'
     error_sfrbox='Échec de la connexion à la BOX SFR (192.168.1.1)'
     exit 1
   fi
@@ -72,13 +72,13 @@ modify_ecomode() {
   if echo "$response" | grep -q "enabled"
   then
     notify_sfrbox="Mode ECO : Activé"
-    logger -t "$0" "Mode ECO : Activé"
+    logger -t "SFR ECO" "Mode ECO : Activé"
   elif echo "$response" | grep -q "disabled"
   then
     notify_sfrbox="Mode ECO : Désactivé"
-    logger -t "$0" "Mode ECO : Désactivé"
+    logger -t "SFR ECO" "Mode ECO : Désactivé"
   else
-    logger -t "$0" "Mode ECO : état inconnu !"
+    logger -t "SFR ECO" "Mode ECO : état inconnu !"
     error_sfrbox="Mode ECO : état inconnu !"
   fi
 }
@@ -101,7 +101,7 @@ curl "https://noti.dsjdf.fr/$tortue_topic" \
   -H "Tags: herb" \
   -H "Icon: https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Devices-network-wired-icon.png" \
   -d "
-SFR BOX
+SFR BOX $0
 ==========================
 
 $notify_sfrbox
