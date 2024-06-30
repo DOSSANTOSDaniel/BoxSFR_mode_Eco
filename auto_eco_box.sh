@@ -110,6 +110,4 @@ $notify_sfrbox
 # Erreurs
 ----------------
 $error_sfrbox
-==========================
-"
-daniel@tortue:~/Scripts$
+=========================="
