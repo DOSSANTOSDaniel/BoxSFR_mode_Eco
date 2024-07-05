@@ -26,10 +26,7 @@ url_login="http://192.168.1.1/login"
 url_eco="http://192.168.1.1/eco"
 
 secrets_box="$HOME/.secrets/sfrbox"
-secrets_ntfy="$HOME/.secrets/ntfy"
 
-temp_token="$(awk -F: '/token/ {print $2}' "$secrets_ntfy")"
-tortue_topic="$(awk -F: '/topic/ {print $2}' "$secrets_ntfy")"
 user_sfrbox="$(awk -F: '/user/ {print $2}' "$secrets_box")"
 pass_sfrbox="$(awk -F: '/pass/ {print $2}' "$secrets_box")"
 data_login="login=${user_sfrbox}&password=${pass_sfrbox}"
@@ -92,22 +89,3 @@ then
 else
   modify_ecomode on
 fi
-
-## Notifications avec NTFY
-curl "https://noti.dsjdf.fr/$tortue_topic" \
-  -H "Authorization: Bearer $temp_token" \
-  -H "Title: Modification du mode ECO " \
-  -H "Priority: default" \
-  -H "Tags: herb" \
-  -H "Icon: https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Devices-network-wired-icon.png" \
-  -d "
-SFR BOX $0
-==========================
-
-$notify_sfrbox
-==========================
-
-# Erreurs
-----------------
-$error_sfrbox
-=========================="
