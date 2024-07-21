@@ -18,3 +18,5 @@ crontab -e
 0 2 * * * /chemin/vers/le/script/auto_eco_box.sh
 0 18 * * * /chemin/vers/le/script/auto_eco_box.sh
 ```
+## Reste à faire
+- [ ] Détecter l'état initial dans le but de tester l'état voulu.
